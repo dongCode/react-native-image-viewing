@@ -1,6 +1,6 @@
 {
   "name": "@dplus/images",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "React Native modal component for viewing images as a sliding gallery",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -21,7 +21,8 @@
   ],
   "scripts": {
     "build": "tsc",
-    "postversion": "yarn build"
+    "postversion": "yarn build",
+    "publish": "yarn build && npm publish"
   },
   "peerDependencies": {
     "react": ">=16.11.0",
