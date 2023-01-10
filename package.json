@@ -1,12 +1,15 @@
 {
-  "name": "@dplus/image-view",
-  "version": "0.2.2",
+  "name": "@dplus/images",
+  "version": "0.0.1",
   "description": "React Native modal component for viewing images as a sliding gallery",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dongCode/react-native-image-viewing.git"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [
     "react",
