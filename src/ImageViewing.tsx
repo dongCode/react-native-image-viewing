@@ -204,6 +204,10 @@ const Images = (props: IImages) => {
     visible: false,
     imageIndex: 0
   });
+
+  if(!data || data.length === 0) {
+    return null
+  }
   return (
     <>
       <ImagesModal
