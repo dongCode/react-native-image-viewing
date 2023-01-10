@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { Image } from "react-native";
-import { ImageSource } from "../@types";
+import { ImageSource } from "../types";
 
 const useImagePrefetch = (images: ImageSource[]) => {
   useEffect(() => {

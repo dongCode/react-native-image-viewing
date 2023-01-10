@@ -16,7 +16,7 @@ import useImageDimensions from "../../hooks/useImageDimensions";
 import usePanResponder from "../../hooks/usePanResponder";
 
 import { getImageStyles, getImageTransform } from "../../utils";
-import { ImageSource } from "../../@types";
+import { ImageSource } from "../../types";
 import { ImageLoading } from "./ImageLoading";
 
 const SWIPE_CLOSE_OFFSET = 75;

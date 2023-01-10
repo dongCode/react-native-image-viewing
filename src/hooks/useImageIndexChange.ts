@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { NativeSyntheticEvent, NativeScrollEvent } from "react-native";
 
-import { Dimensions } from "../@types";
+import { Dimensions } from "../types";
 
 const useImageIndexChange = (imageIndex: number, screen: Dimensions) => {
   const [currentImageIndex, setImageIndex] = useState(imageIndex);

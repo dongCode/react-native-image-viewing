@@ -7,7 +7,7 @@ import {
   NativeSyntheticEvent,
 } from "react-native";
 
-import { Dimensions } from "../@types";
+import { Dimensions } from "../types";
 
 const DOUBLE_TAP_DELAY = 300;
 let lastTapTS: number | null = null;

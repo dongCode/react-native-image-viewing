@@ -16,7 +16,7 @@ import StatusBarManager from "./components/StatusBarManager";
 import useAnimatedComponents from "./hooks/useAnimatedComponents";
 import useImageIndexChange from "./hooks/useImageIndexChange";
 import useRequestClose from "./hooks/useRequestClose";
-import { ImageSource } from "./@types";
+import { ImageSource } from "./types";
 
 type Props = {
   images: ImageSource[];

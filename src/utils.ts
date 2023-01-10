@@ -6,7 +6,7 @@ import {
   PanResponderInstance,
   NativeTouchEvent,
 } from "react-native";
-import { Dimensions, Position } from "./@types";
+import { Dimensions, Position } from "./types";
 
 type CacheStorageItem = { key: string; value: any };
 

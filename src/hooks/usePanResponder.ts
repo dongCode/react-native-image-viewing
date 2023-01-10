@@ -10,7 +10,7 @@ import {
   PanResponderGestureState,
 } from "react-native";
 
-import { Position } from "../@types";
+import { Position } from "../types";
 import {
   createPanResponder,
   getDistanceBetweenTouches,
