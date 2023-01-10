@@ -1,4 +1,4 @@
-import React, { ComponentType, useCallback, useRef, useEffect } from "react";
+import React, { ComponentType, useCallback, useRef, useEffect, useState } from "react";
 import {
   Animated,
   Dimensions,
@@ -7,6 +7,11 @@ import {
   VirtualizedList,
   ModalProps,
   Modal,
+  ScrollView,
+  ScrollViewProps,
+  Image,
+  Pressable,
+  ViewStyle
 } from "react-native";
 
 import ImageItem from "./components/ImageItem/ImageItem";
@@ -17,6 +22,7 @@ import useAnimatedComponents from "./hooks/useAnimatedComponents";
 import useImageIndexChange from "./hooks/useImageIndexChange";
 import useRequestClose from "./hooks/useRequestClose";
 import { ImageSource } from "./types";
+import ImageFooter from "./components/ImageFooter";
 
 type Props = {
   images: ImageSource[];
@@ -48,7 +54,7 @@ function ImageViewing({
   imageIndex,
   visible,
   onRequestClose,
-  onLongPress = () => {},
+  onLongPress = () => { },
   onImageIndexChange,
   animationType = DEFAULT_ANIMATION_TYPE,
   backgroundColor = DEFAULT_BG_COLOR,
@@ -140,8 +146,8 @@ function ImageViewing({
             keyExtractor
               ? keyExtractor(imageSrc, index)
               : typeof imageSrc === "number"
-              ? `${imageSrc}`
-              : imageSrc.uri
+                ? `${imageSrc}`
+                : imageSrc.uri
           }
         />
         {typeof FooterComponent !== "undefined" && (
@@ -159,6 +165,10 @@ function ImageViewing({
 }
 
 const styles = StyleSheet.create({
+  scroll: {
+    height: 110 
+  },
+  image: { flexDirection: 'row', paddingVertical: 10 },
   container: {
     flex: 1,
     backgroundColor: "#000",
@@ -177,8 +187,66 @@ const styles = StyleSheet.create({
   },
 });
 
-const EnhancedImageViewing = (props: Props) => (
+const ImagesModal = (props: Props) => (
   <ImageViewing key={props.imageIndex} {...props} />
 );
 
-export default EnhancedImageViewing;
+interface IImages extends Props {
+  scrollProps?: ScrollViewProps,
+  data: string[],
+  imagesModalProps?: Props,
+  imageContainerStyle?: ViewStyle 
+}
+
+const Images = (props: IImages) => {
+  const { data,scrollProps = {},imagesModalProps = {},imageContainerStyle = {} } = props
+  const [imagesModal, setImagesModal] = useState({
+    visible: false,
+    imageIndex: 0
+  });
+  return (
+    <>
+      <ImagesModal
+        images={data.map((uri: string) => {
+          return {
+            uri
+          }
+        })}
+        imageIndex={imagesModal.imageIndex}
+        visible={imagesModal.visible}
+        onRequestClose={() => setImagesModal({ ...imagesModal, visible: false })}
+        FooterComponent={
+          ({ imageIndex }) => (
+            <ImageFooter imageIndex={imageIndex} imagesCount={data.length} />
+          )
+        }
+        {...imagesModalProps}
+      />
+      <ScrollView style={styles.scroll} horizontal {...scrollProps} >
+        <View style={[styles.image, imageContainerStyle]} >
+          {
+            data.map((v: any, i: number) => {
+              return (
+                <Pressable onPress={() => setImagesModal({ imageIndex: i, visible: true })}>
+                  <Image
+
+                    source={{ uri: v }}
+                    style={{ height: 60, width: 60, marginLeft: 10 }}
+                    resizeMode={"cover"}
+                    key={i}
+                  />
+                </Pressable>
+              )
+            })
+          }
+        </View>
+      </ScrollView>
+    </>
+
+  )
+}
+
+export  {
+  Images,
+  ImagesModal
+}
