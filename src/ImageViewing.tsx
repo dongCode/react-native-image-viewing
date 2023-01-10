@@ -191,7 +191,7 @@ const ImagesModal = (props: Props) => (
   <ImageViewing key={props.imageIndex} {...props} />
 );
 
-interface IImages extends Props {
+interface IImages {
   scrollProps?: ScrollViewProps,
   data: string[],
   imagesModalProps?: Props,

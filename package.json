@@ -1,6 +1,6 @@
 {
   "name": "@dplus/images",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "React Native modal component for viewing images as a sliding gallery",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
