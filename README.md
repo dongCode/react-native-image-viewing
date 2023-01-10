@@ -1,9 +1,7 @@
-# react-native-image-viewing
+# @dplus/images
 
 > React Native modal component for viewing images as a sliding gallery.
 
-[![npm version](https://badge.fury.io/js/react-native-image-viewing.svg)](https://badge.fury.io/js/react-native-image-viewing)
-[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 - 🔥Pinch zoom for both iOS and Android
 - 🔥Double tap to zoom for both iOS and Android
@@ -13,46 +11,32 @@
 
 Try with Expo: https://expo.io/@antonkalinin/react-native-image-viewing
 
-<p align="center">
-  <img src="https://github.com/jobtoday/react-native-image-viewing/blob/master/demo.gif?raw=true" height="480" />
-</p>
 
 ## Installation
 
 ```bash
-yarn add react-native-image-viewing
+yarn add @dplus/images
 ```
 
 or
 
 ```bash
-npm install --save react-native-image-viewing
+npm install --save @dplus/images
 ```
 
 ## Usage
 
 ```jsx
-import ImageView from "react-native-image-viewing";
+import Images from "@dplus/images";
 
 const images = [
-  {
-    uri: "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4",
-  },
-  {
-    uri: "https://images.unsplash.com/photo-1573273787173-0eb81a833b34",
-  },
-  {
-    uri: "https://images.unsplash.com/photo-1569569970363-df7b6160d111",
-  },
+  "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4",
+  "https://images.unsplash.com/photo-1573273787173-0eb81a833b34",
+  "https://images.unsplash.com/photo-1569569970363-df7b6160d111"
 ];
 
-const [visible, setIsVisible] = useState(false);
-
 <ImageView
-  images={images}
-  imageIndex={0}
-  visible={visible}
-  onRequestClose={() => setIsVisible(false)}
+  data={images}
 />
 ```
 
@@ -82,7 +66,7 @@ const [visible, setIsVisible] = useState(false);
 
 ## Contributing
 
-To start contributing clone this repo and then run inside `react-native-image-viewing` folder:
+To start contributing clone this repo and then run inside `@dplus/images` folder:
 
 ```bash
 yarn
