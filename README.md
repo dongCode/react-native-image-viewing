@@ -9,8 +9,6 @@
 - 🔥Custom header and footer components
 - 🔥Uses VirtualizedList to optimize image loading and rendering
 
-Try with Expo: https://expo.io/@antonkalinin/react-native-image-viewing
-
 
 ## Installation
 
