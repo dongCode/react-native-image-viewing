@@ -166,7 +166,7 @@ function ImageViewing({
 
 const styles = StyleSheet.create({
   scroll: {
-    height: 110 
+    height: 80
   },
   image: { flexDirection: 'row', paddingVertical: 10 },
   container: {
@@ -195,17 +195,17 @@ interface IImages {
   scrollProps?: ScrollViewProps,
   data: string[],
   imagesModalProps?: Props,
-  imageContainerStyle?: ViewStyle 
+  imageContainerStyle?: ViewStyle
 }
 
 const Images = (props: IImages) => {
-  const { data,scrollProps = {},imagesModalProps = {},imageContainerStyle = {} } = props
+  const { data, scrollProps = {}, imagesModalProps = {}, imageContainerStyle = {} } = props
   const [imagesModal, setImagesModal] = useState({
     visible: false,
     imageIndex: 0
   });
 
-  if(!data || data.length === 0) {
+  if (!data || data.length === 0) {
     return null
   }
   return (
@@ -226,31 +226,34 @@ const Images = (props: IImages) => {
         }
         {...imagesModalProps}
       />
-      <ScrollView style={styles.scroll} horizontal {...scrollProps} >
-        <View style={[styles.image, imageContainerStyle]} >
-          {
-            data.map((v: any, i: number) => {
-              return (
-                <Pressable onPress={() => setImagesModal({ imageIndex: i, visible: true })}>
-                  <Image
+      <View style={{ height: 80 }}>
+        <ScrollView style={styles.scroll} horizontal {...scrollProps} >
+          <View style={[styles.image, imageContainerStyle]} >
+            {
+              data.map((v: any, i: number) => {
+                return (
+                  <Pressable onPress={() => setImagesModal({ imageIndex: i, visible: true })}>
+                    <Image
 
-                    source={{ uri: v }}
-                    style={{ height: 60, width: 60, marginLeft: 10 }}
-                    resizeMode={"cover"}
-                    key={i}
-                  />
-                </Pressable>
-              )
-            })
-          }
-        </View>
-      </ScrollView>
+                      source={{ uri: v }}
+                      style={{ height: 60, width: 60, marginLeft: 10 }}
+                      resizeMode={"cover"}
+                      key={i}
+                    />
+                  </Pressable>
+                )
+              })
+            }
+          </View>
+        </ScrollView>
+      </View>
+
     </>
 
   )
 }
 
-export  {
+export {
   Images,
   ImagesModal
 }
