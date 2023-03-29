@@ -48,6 +48,15 @@ const DEFAULT_DELAY_LONG_PRESS = 800;
 const SCREEN = Dimensions.get("screen");
 const SCREEN_WIDTH = SCREEN.width;
 
+const UNIQUE = '$$unique-key-'
+
+let key = 1
+
+
+const generateKey = () => {
+  return UNIQUE + key++
+}
+
 function ImageViewing({
   images,
   keyExtractor,
@@ -232,13 +241,12 @@ const Images = (props: IImages) => {
             {
               data.map((v: any, i: number) => {
                 return (
-                  <Pressable onPress={() => setImagesModal({ imageIndex: i, visible: true })}>
+                  <Pressable key={generateKey()} onPress={() => setImagesModal({ imageIndex: i, visible: true })}>
                     <Image
 
                       source={{ uri: v }}
                       style={{ height: 60, width: 60, marginLeft: 10 }}
                       resizeMode={"cover"}
-                      key={i}
                     />
                   </Pressable>
                 )
