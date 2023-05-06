@@ -1,7 +1,8 @@
-import { Images, ImagesModal}  from "./ImageViewing";
+import { ImageModal, Images, ImagesModal}  from "./ImageViewing";
 
 // @ts-ignore
 export {
-    ImagesModal
+    ImagesModal,
+    ImageModal
 }
 export default Images

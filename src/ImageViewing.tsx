@@ -25,6 +25,7 @@ import useImageIndexChange from "./hooks/useImageIndexChange";
 import useRequestClose from "./hooks/useRequestClose";
 import { ImageSource } from "./types";
 import ImageFooter from "./components/ImageFooter";
+import { styles } from "./styles";
 
 type Props = {
   images: ImageSource[];
@@ -175,28 +176,7 @@ function ImageViewing({
   );
 }
 
-const styles = StyleSheet.create({
-  scroll: {
-    height: 80
-  },
-  image: { flexDirection: 'row', paddingVertical: 10 },
-  container: {
-    flex: 1,
-    backgroundColor: "#000",
-  },
-  header: {
-    position: "absolute",
-    width: "100%",
-    zIndex: 1,
-    top: 0,
-  },
-  footer: {
-    position: "absolute",
-    width: "100%",
-    zIndex: 1,
-    bottom: 0,
-  },
-});
+
 
 const ImagesModal = (props: Props) => (
   <ImageViewing key={props.imageIndex} {...props} />
@@ -205,14 +185,14 @@ const ImagesModal = (props: Props) => (
 interface IImages {
   scrollProps?: ScrollViewProps,
   style: StyleProp<ViewStyle>
-  imageStyle:StyleProp<ImageStyle>
+  imageStyle: StyleProp<ImageStyle>
   data: string[],
   imagesModalProps?: Props,
   imageContainerStyle?: ViewStyle
 }
 
 const Images = (props: IImages) => {
-  const { data, scrollProps = {}, imagesModalProps = {}, imageContainerStyle = {}, style,imageStyle } = props
+  const { data, scrollProps = {}, imagesModalProps = {}, imageContainerStyle = {}, style, imageStyle } = props
   const [imagesModal, setImagesModal] = useState({
     visible: false,
     imageIndex: 0
@@ -269,7 +249,56 @@ const Images = (props: IImages) => {
   )
 }
 
+const ImageModal = (props: IImages) => {
+  const { data,  imagesModalProps = {},  imageStyle } = props
+  const [imagesModal, setImagesModal] = useState({
+    visible: false,
+    imageIndex: 0
+  });
+
+  if (!data || data.length === 0) {
+    return null
+  }
+  return (
+    <>
+      <ImagesModal
+        images={data.map((uri: string) => {
+          return {
+            uri
+          }
+        })}
+        imageIndex={imagesModal.imageIndex}
+        visible={imagesModal.visible}
+        onRequestClose={() => setImagesModal({ ...imagesModal, visible: false })}
+        FooterComponent={
+          ({ imageIndex }) => (
+            <ImageFooter imageIndex={imageIndex} imagesCount={data.length} />
+          )
+        }
+        {...imagesModalProps}
+      />
+
+      {
+        data.map((v: any, i: number) => {
+          return (
+            <Pressable key={generateKey()} onPress={() => setImagesModal({ imageIndex: i, visible: true })}>
+              <Image
+                source={{ uri: v }}
+                style={StyleSheet.flatten([imageStyle])}
+                resizeMode={"cover"}
+              />
+            </Pressable>
+          )
+        })
+      }
+
+    </>
+
+  )
+}
+
 export {
   Images,
+  ImageModal,
   ImagesModal
 }
