@@ -277,7 +277,6 @@ const ImageModal = (props: IImages) => {
         }
         {...imagesModalProps}
       />
-
       {
         data.map((v: any, i: number) => {
           return (
