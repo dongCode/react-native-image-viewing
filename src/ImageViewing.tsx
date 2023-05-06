@@ -11,7 +11,9 @@ import {
   ScrollViewProps,
   Image,
   Pressable,
-  ViewStyle
+  ViewStyle,
+  ImageStyle,
+  StyleProp
 } from "react-native";
 
 import ImageItem from "./components/ImageItem/ImageItem";
@@ -202,13 +204,15 @@ const ImagesModal = (props: Props) => (
 
 interface IImages {
   scrollProps?: ScrollViewProps,
+  style: StyleProp<ViewStyle>
+  imageStyle:StyleProp<ImageStyle>
   data: string[],
   imagesModalProps?: Props,
   imageContainerStyle?: ViewStyle
 }
 
 const Images = (props: IImages) => {
-  const { data, scrollProps = {}, imagesModalProps = {}, imageContainerStyle = {} } = props
+  const { data, scrollProps = {}, imagesModalProps = {}, imageContainerStyle = {}, style,imageStyle } = props
   const [imagesModal, setImagesModal] = useState({
     visible: false,
     imageIndex: 0
@@ -235,7 +239,12 @@ const Images = (props: IImages) => {
         }
         {...imagesModalProps}
       />
-      <View style={{ height: 80 }}>
+      <View style={StyleSheet.flatten([
+        {
+          height: 80
+        },
+        style
+      ])}>
         <ScrollView style={styles.scroll} horizontal {...scrollProps} >
           <View style={[styles.image, imageContainerStyle]} >
             {
@@ -243,9 +252,8 @@ const Images = (props: IImages) => {
                 return (
                   <Pressable key={generateKey()} onPress={() => setImagesModal({ imageIndex: i, visible: true })}>
                     <Image
-
                       source={{ uri: v }}
-                      style={{ height: 60, width: 60, marginLeft: 10 }}
+                      style={StyleSheet.flatten([{ height: 60, width: 60, marginLeft: 10 }, imageStyle])}
                       resizeMode={"cover"}
                     />
                   </Pressable>
