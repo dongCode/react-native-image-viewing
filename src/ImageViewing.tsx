@@ -184,8 +184,8 @@ const ImagesModal = (props: Props) => (
 
 interface IImages {
   scrollProps?: ScrollViewProps,
-  style: StyleProp<ViewStyle>
-  imageStyle: StyleProp<ImageStyle>
+  style?: StyleProp<ViewStyle>
+  imageStyle?: StyleProp<ImageStyle>
   data: string[],
   imagesModalProps?: Props,
   imageContainerStyle?: ViewStyle
