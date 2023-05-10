@@ -299,5 +299,6 @@ const ImageModal = (props: IImages) => {
 export {
   Images,
   ImageModal,
-  ImagesModal
+  ImagesModal,
+  ImageFooter
 }
